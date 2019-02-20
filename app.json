@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index1/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "华东师大经管书院社区活动室预约",
+    "navigationBarTextStyle":"black"
+  }
+}
