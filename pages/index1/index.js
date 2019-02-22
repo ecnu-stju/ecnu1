@@ -12,6 +12,8 @@ Page({
     width: 0,
     currentIndex: 0,
     currentTime: 0,
+    status1:"空闲",
+    status2:"约满",
     timeArr: [
       { "time": "8:00-10:00", "status": "空闲" },
       { "time": "8:00-10:00", "status": "约满" },
@@ -23,9 +25,9 @@ Page({
       { "time": "8:00-10:00", "status": "约满" },
       { "time": "8:00-10:00", "status": "约满" },
       { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-22:00", "status": "约满" }
+      { "time": "8:00-10:00", "status": "空闲" },
+      { "time": "8:00-10:00", "status": "空闲" },
+      { "time": "8:00-22:00", "status": "空闲" }
     ]
   },
   
@@ -133,9 +135,10 @@ Page({
         icon: 'loading',
         duration: 1000,
         mask: true
-      })}
+      })
+    }
     ///
-
+    else{
     //为下半部分的点击事件
     this.setData({
       currentTime: event.currentTarget.dataset.tindex
@@ -152,5 +155,16 @@ Page({
       });
     }
     */
+    }
+  },
+
+  jumpPage: function(){
+    wx.navigateTo({
+      url: '/pages/stat/stat',
+    })
+    /*this.setData({
+      'timeArr[q].status':"约满"
+    })*/
   }
+
 })
