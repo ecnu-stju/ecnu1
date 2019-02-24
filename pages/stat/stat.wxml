@@ -40,7 +40,7 @@
       </view>
     </view>
     <view class="section btn-area">
-      <button class='btn_sub' formType="submit">确认提交</button>
+      <button class='btn_sub' formType="submit" bindtap='submiANDback'>确认提交</button>
     </view>
   </form>
 

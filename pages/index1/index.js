@@ -1,3 +1,4 @@
+
 //index.js
 //获取应用实例
 const app = getApp()
@@ -15,19 +16,19 @@ Page({
     status1:"空闲",
     status2:"约满",
     timeArr: [
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "约满" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-10:00", "status": "空闲" },
-      { "time": "8:00-22:00", "status": "空闲" }
+      { "time": "8:00-9:00", "status": "空闲" },
+      { "time": "9:00-10:00", "status": "约满" },
+      { "time": "10:00-11:00", "status": "约满" },
+      { "time": "11:00-12:00", "status": "空闲" },
+      { "time": "12:00-13:00", "status": "空闲" },
+      { "time": "13:00-14:00", "status": "空闲" },
+      { "time": "14:00-15:00", "status": "空闲" },
+      { "time": "15:00-16:00", "status": "约满" },
+      { "time": "16:00-17:00", "status": "约满" },
+      { "time": "17:00-18:00", "status": "约满" },
+      { "time": "18:00-19:00", "status": "空闲" },
+      { "time": "19:00-20:00", "status": "空闲" },
+      { "time": "20:00-21:00", "status": "空闲" }
     ]
   },
   
@@ -35,7 +36,75 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+///
     var that = this;
+
+    wx.cloud.init()
+    const db = wx.cloud.database()
+
+    if (!this.data.openid) {
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          app.globalData.openid = res.result.openid
+          this.setData({
+            //step: 2,
+            openid: res.result.openid
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '获取 openid 失败，请检查是否有部署 login 云函数',
+          })
+          console.log('[云函数] [login] 获取 openid 失败，请检查是否有部署云函数，错误信息：', err)
+        }
+      })
+    }
+
+    db.collection('books').where({
+      description: 'day1' // 填入当前所需
+    }).get({
+
+      /* data 字段表示需新增的 JSON 数据
+      data: {
+        // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+        description: 'day1',
+        //due: new Date('2018-09-01'),
+        tags: [
+          '空闲', '空闲', '空闲', '空闲', '空闲', 
+          '空闲', '空闲', '空闲', '空闲', '空闲',
+          '空闲', '空闲', '空闲'
+        ],
+        },
+        */
+
+      success(res) {
+        // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+        that.setData({   //注意这里用that
+          counterId: res.data[0]._id
+          //count: 1
+        })
+
+        wx.showToast({
+          title: '查询记录成功',
+        })
+        console.log('[数据库] [查询记录] 成功，记录 _id: \n', res.data[0].tags[1])
+        console.log(that.data.timeArr[1].status)
+        for (var i=0;i<13;i++)
+        {
+          that.data.timeArr[i].status = res.data[0].tags[i];
+        }
+
+        that.setData({ timeArr: that.data.timeArr})  //setdata才能更新渲染并使数据生效
+        //console.log(that.data)
+      },
+      fail: console.error
+    })
+///
+
+    //var that = this;
     function getThisMonthDays(year, month) {
       return new Date(year, month, 0).getDate();
     }
@@ -132,7 +201,7 @@ Page({
     if (this.data.timeArr[event.currentTarget.dataset.tindex].status == "约满") {
       wx.showToast({
         title: '已被约',
-        icon: 'loading',
+        icon: 'none',
         duration: 1000,
         mask: true
       })
@@ -158,10 +227,18 @@ Page({
     }
   },
 
-  jumpPage: function(){
+  jumpPage: function(x){
+    console.log(this.data.currentTime)
     wx.navigateTo({
-      url: '/pages/stat/stat',
+      ///
+      url: '/pages/stat/stat?timeid=' + this.data.currentTime + '&counterId=' + this.data.counterId ,
+      
+      success(res) {
+        //console.log(this)
+      }
+      ///
     })
+    
     /*this.setData({
       'timeArr[q].status':"约满"
     })*/
