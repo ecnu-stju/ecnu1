@@ -50,9 +50,10 @@ scroll-view .current text{
  height: 135rpx;
  text-align: center;
  box-sizing: border-box;
- background-color: #fff;
+ color: #fff;
+ background-color: transparent;
  padding-top: 35rpx;
- border: 1px solid #b9c1c8;
+ border: 2.5rpx solid #e54449;
 }
 .time .listItem text{
  display: block;
@@ -70,30 +71,50 @@ scroll-view .current text{
  background-color: #fff;
 }
 .operate .del{
- 
   color: #e54449; 
+  background-color: #fff;
 }
 .operate button::after{
- border: 2px solid #e54449;
+ border: 10rpx solid #e54449;
 }
 .operate{
  display: flex;
  flex-wrap: nowrap;
- justify-content: space-around;
+ justify-content: space-between;
 }
 .operate button:nth-child(2):after{
- border: 2px solid #e54449;
+ border: 10rpx solid #e54449;
+ 
 }
 .operate .save{
- color: #fff;
- background-color: #e54449; 
- 
+ color: cyan;
+ background-color: transparent;
+ border-radius: 98rpx;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ width: 500rpx;
 }
 .operate{
- width: 100%;
+ width: 710rpx;
  padding: 30rpx 0;
- background-color: #fff;
- position: fixed;
- bottom: 0;
+ position: relative;
+ margin-top: 350rpx;
 }
- 
+
+.back{
+  background-size: 100% 100%;
+  width: 750rpx;
+  height: 1300rpx;
+}
+
+.save.btn-hover {
+  background-color: maroon;
+}
+
+.btn_image{
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 15rpx;
+}

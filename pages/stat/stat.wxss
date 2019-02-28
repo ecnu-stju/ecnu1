@@ -23,10 +23,16 @@
 }
 
 .btn_sub {
-  width: 160px;
-  margin: 10px auto;
+  width: 560rpx;
+  height: 100rpx;
+  margin: 10rpx auto;
   color: white;
-  background-color: red;
+  background-color: burlywood;
+  border-radius: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .v_title {
@@ -74,4 +80,19 @@
   margin: 10 auto;
   text-align: center;
   margin-bottom: 10px;
+}
+
+.bottom-image{
+  height: 350rpx;
+  width: 300rpx;
+}
+
+.btn_sub.btn-hover{
+  background-color: bisque;
+}
+
+.btn-image{
+  margin-right: 10rpx;
+  width: 90rpx;
+  height: 100rpx;
 }
