@@ -1,18 +1,31 @@
+page{
+  background-color: floralwhite;
+  }
+
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-        
+
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 135rpx;
+  height: 135rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
+.userinfo-nickname {
+  color: black;
+}
+
+.btn_top{
+  background-color: transparent;
+  border: 2rpx solid black;
+}
+
 .input-text {
-  border: 1px solid #ddd;
+  border: 1px solid black;
   height: 30px;
   margin: 10px;
   border-radius: 5px;
@@ -25,14 +38,15 @@
 .btn_sub {
   width: 560rpx;
   height: 100rpx;
-  margin: 10rpx auto;
-  color: white;
-  background-color: burlywood;
+  margin: 40rpx auto;
+  color: black;
+  background-color: transparent;
   border-radius: 100rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 3rpx solid black;
 }
 
 .v_title {
@@ -91,10 +105,8 @@
   background-color: bisque;
 }
 
-.btn-image{
-  margin-right: 10rpx;
-  width: 90rpx;
-  height: 100rpx;
+.back{
+  background-size: 100% 100%;
+  width: 750rpx;
+  height: 1300rpx;
 }
-
-

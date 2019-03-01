@@ -40,7 +40,10 @@
       </view>
     </view>
     <view class="section btn-area">
-      <button class='btn_sub' formType="submit">确认提交</button>
+      <button class='btn_sub' formType="submit" bindtap='submiANDback' hover-class="btn-hover">
+       <image src="../../images/fish2.png" class='btn-image'></image>
+       <view>确认提交</view>
+      </button>
     </view>
   </form>
 
@@ -75,4 +78,7 @@
   <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
     {{notice_str}}
   </toast>
+  <view class="center">
+   <image src="../../images/ecnu.jpg" class="bottom-image" mode="aspectFit"></image>
+  </view>
 </view>

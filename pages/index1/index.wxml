@@ -1,5 +1,5 @@
 <!--pages/orderTime/index.wxml-->
-<view class='containt'>
+<view class="back" style="background-image: url('../../images/background.jpg')">
  <scroll-view class="scroll-view_H" scroll-x>
   <view class='list' style='width:{{ width }}rpx'>
    <view bindtap="select" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">
@@ -14,8 +14,11 @@
    <text>{{ timeItem.status }}</text>
   </view>
   <view class='operate'>
-   <button class='del'>删除</button>
-   <button class='save' bindtap='jumpPage'>预约</button>
+   
+   <button class='save' data-time="{{ timeItem.time}}" bindtap='jumpPage' hover-class="btn-hover">
+    <image class="btn_image" src="../../images/btn.png"></image>
+    <text>预约</text>
+   </button>
   </view>
  </view>
 
