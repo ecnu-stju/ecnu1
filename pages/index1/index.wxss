@@ -15,27 +15,28 @@ scroll-view .listItem{
  text-align: center;
  width: 186rpx;
  height: 128rpx;
- background-color: #f1f2f6;
+ background-color: transparent;
  padding-top: 30rpx;
  box-sizing: border-box;
  /* float: left; */
  display: inline-block;
+ color: lightslategrey;
 }
 scroll-view .listItem text{
  display: block;
 }
 scroll-view .listItem .name{
- font-size: 30rpx;
+ font-size: 40rpx;
 }
 scroll-view .listItem .date{
- font-size: 30rpx;
+ font-size: 35rpx;
 }
 scroll-view .current{
- background-color: #76aef8;
- 
+ background-color: transparent;
+ border: 7rpx solid steelblue;
 }
 scroll-view .current text{
- color: #fff;
+ color: black;
 }
 .time{
  width: 95%;
@@ -50,44 +51,37 @@ scroll-view .current text{
  height: 135rpx;
  text-align: center;
  box-sizing: border-box;
- color: #fff;
  background-color: transparent;
  padding-top: 35rpx;
- border: 2.5rpx solid #e54449;
+ border: 2rpx solid black;
 }
 .time .listItem text{
  display: block;
  font-size: 30rpx;
 }
 .time .current{
- border: 1px solid #76aef8;
+  background-color: steelblue;
+ border: 1px solid darkblue,
 }
+
 .time .current text{
- color: #76aef8;
+ color: white;
 }
+
 .operate button{
  width:300rpx;
  height: 88rpx;
  background-color: #fff;
 }
-.operate .del{
-  color: #e54449; 
-  background-color: #fff;
-}
-.operate button::after{
- border: 10rpx solid #e54449;
-}
+
 .operate{
  display: flex;
  flex-wrap: nowrap;
  justify-content: space-between;
 }
-.operate button:nth-child(2):after{
- border: 10rpx solid #e54449;
- 
-}
+
 .operate .save{
- color: cyan;
+ color: black;
  background-color: transparent;
  border-radius: 98rpx;
  display: flex;
@@ -95,12 +89,13 @@ scroll-view .current text{
  align-items: center;
  justify-content: center;
  width: 500rpx;
+ border:5rpx solid black;
 }
 .operate{
  width: 710rpx;
  padding: 30rpx 0;
  position: relative;
- margin-top: 350rpx;
+ margin-top: 150rpx;
 }
 
 .back{
@@ -110,7 +105,7 @@ scroll-view .current text{
 }
 
 .save.btn-hover {
-  background-color: maroon;
+  background-color: aquamarine;
 }
 
 .btn_image{

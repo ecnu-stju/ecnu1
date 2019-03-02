@@ -1,5 +1,5 @@
 <!--pages/orderTime/index.wxml-->
-<view class="back" style="background-image: url('../../images/bj.jpg')">
+<view class="back" style="background-image: url('../../images/background.jpg')">
  <scroll-view class="scroll-view_H" scroll-x>
   <view class='list' style='width:{{ width }}rpx'>
    <view bindtap="select" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">

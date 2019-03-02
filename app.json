@@ -1,13 +1,45 @@
 {
   "pages":[
+    "pages/head/head",
     "pages/index1/index",
     "pages/logs/logs",
-    "pages/stat/stat"
+    "pages/stat/stat",
+    "pages/about/about"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "华东师大经管书院社区活动室预约",
     "navigationBarTextStyle":"black"
+  },
+
+  "tabBar":{
+    "color": "black",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "white",
+    "list": [{
+      "pagePath": "pages/head/head",
+      "text": "Start",
+      "iconPath": "images/start.png",
+      "selectedIconPath": "images/startS.png"
+    },{
+      "pagePath": "pages/index1/index",
+      "text": "房间预约",
+      "iconPath": "images/app.png",
+      "selectedIconPath": "images/appS.png"
+    },{
+      "pagePath": "pages/about/about",
+      "text": "个人信息",
+      "iconPath": "images/person.png",
+      "selectedIconPath": "images/personS.png"
+    }]
+           
   }
+   
+
 }
+  
+
+
+
