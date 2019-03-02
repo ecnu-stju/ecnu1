@@ -12,7 +12,7 @@ page{
   width: 135rpx;
   height: 135rpx;
   margin: 20rpx;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 .userinfo-nickname {
