@@ -115,29 +115,25 @@ Page({
 
     db.collection('books').where({
       isFirst: true // 填入当前所需
-    }).get({
-      success(res) {
+    }).get().then(res=>{
         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
         that.setData({   //注意这里用that
           cacheDate: res.data[0].description
-        })
+        });
 
         console.log('初查 成功，记录 _id: \n', res.data[0].tags)
         
-      },
-    });
+      });
     // console.log(db.collection('books').where({
     //   description: that.data.calendar[0].date // 填入当前所需
     // }))
 
-//先不进
+//需做一个规范的等待延迟或回调：///分支点
 
-    console.log(that.data.cacheDate)
-    
-    if (that.data.cacheDate == that.data.calendar[0].date){
+    setTimeout(function(){console.log(that.data.cacheDate,'wait');
+    if (that.data.cacheDate != that.data.calendar[0].date){
       console.log('进入分支');
-      console.log(that.data.cacheDate);
-      console.log(that.data.calendar[0].date);
+
       db.collection('books').where({
         description: that.data.cacheDate // 填入当前所需
       }).get({
@@ -147,13 +143,14 @@ Page({
 
           })
         },
-        fail: console.error
+        fail: console.log('cannot find the data of cacheDate')
       })
 
-      db.collection('books').doc(that.data.cacheID).remove({
-        success: console.log,
-        fail: console.error
-      })
+      // db.collection('books').doc(that.data.cacheID).remove({
+      //   success:
+      //     console.log('减了'),
+      //   fail: console.error
+      // })
 
       db.collection('books').add({
         // data 字段表示需新增的 JSON 数据
@@ -184,24 +181,26 @@ Page({
           that.setData({
             new1dID: res.data[0]._id
 
-          })
+          });
+          console.log('new1dID', res.data[0]._id)
         },
         fail: console.error
       })
 
-      db.collection('books').doc(that.data.new1dID).update({
-        // data 传入需要局部更新的数据
-        data: {
-          // 表示将 tags 字段置为 a
-          isFirst: true,
-        },
-        success(res) {
-          //console.log(that.data.bind)
-        console.log('增减成功！！')
-        }
-      })
+      // db.collection('books').doc(that.data.new1dID).update({
+      //   // data 传入需要局部更新的数据
+      //   data: {
+      //     // 表示将 tags 字段置为 a
+      //     isFirst: true,
+      //   },
+      //   success(res) {
+      //     //console.log(that.data.bind)
+      //   console.log('增减成功！！')
+      //   }
+      // })
 
     };
+    }, 1000);
 
 
     db.collection('books').where({
@@ -247,6 +246,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    ///
+    var that = this;
+    const db = wx.cloud.database();
+    
+    setTimeout(function () {
+      if (that.data.cacheDate != that.data.calendar[0].date) {
+        console.log(that.data.cacheDate, 'onshow', that.data.new1dID);
+
+      db.collection('books').doc(that.data.cacheID).remove({
+        success:
+          console.log('减了'),
+        fail: console.error
+      });
+
+
+      db.collection('books').doc(that.data.new1dID).update({
+        // data 传入需要局部更新的数据
+        data: {
+          // 表示将 tags 字段置为 a
+          isFirst: true,
+        },
+        success(res) {
+          //console.log(that.data.bind)
+          console.log('增减成功！！')
+        }
+      })
+      };
+
+    },2000)
+    
+///
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -286,7 +316,7 @@ Page({
     ///
     const db = wx.cloud.database()
     db.collection('books').where({
-      description: that.data.calendar[0].date // 填入当前所需
+      description: that.data.calendar[this.data.currentIndex].date // 填入当前所需
     }).get({
 
       success(res) {
@@ -300,12 +330,14 @@ Page({
           title: '查询记录成功',
         })
         console.log('[数据库] [查询记录] 成功，记录 _id: \n', res.data[0].tags)
-        console.log(that.data.timeArr[1].status)
+        
         for (var i = 0; i < 13; i++) {
           that.data.timeArr[i].status = res.data[0].tags[i];
         }
-
+        
         that.setData({ timeArr: that.data.timeArr })  //setdata才能更新渲染并使数据生效
+        console.log(that.data.timeArr[0].status)
+//确认一下 每天第一个时间段的状况
         //console.log(that.data)
       },
       fail: console.error
@@ -314,6 +346,9 @@ Page({
     ///
 
   },
+
+
+//后面是选择具体时间段
 
   selectTime: function (event) {
     ///

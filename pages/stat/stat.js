@@ -137,10 +137,11 @@ Page({
           title: '成功',
           duration: 1000,
         });
-        wx.switchTab({
+        setTimeout(function () {
+        wx.reLaunch({
           url: '/pages/index1/index',
         });
-
+        },1000);
         //清空表单
         // that.setData({
         //   username: '',
