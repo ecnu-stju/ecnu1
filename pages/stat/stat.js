@@ -38,7 +38,9 @@ Page({
     //console.log(Number(x.timeid))
     this.setData({
       timeIndex: Number(x.timeid),
-      counterId: x.counterId
+
+      counterId: x.nowdID
+
     })
     //console.log(this.data);
     
@@ -84,13 +86,13 @@ Page({
     });
   },
   */
-  bindDateChange: function (e) {
-    var that = this;
-    that.setData({
-      date: e.detail.value
-    })
-    console.log(that.data.date);
-  },
+  // bindDateChange: function (e) {
+  //   var that = this;
+  //   that.setData({
+  //     date: e.detail.value
+  //   })
+  //   console.log(that.data.date);
+  // },
   //提交信息
   formSubmit: function (e) {
     //表单校验
@@ -99,40 +101,58 @@ Page({
     }
     var that = this;
     var formData = e.detail.value;
-    //提交表单
-    wx.request({
-      url: api.INFO,//提交路径
-      data: formData,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data.code)
-        console.log(res.data.msg)
-        if (res.data.code == 200) {
-          wx.showToast({
-            title: '预约成功',
-            icon: 'succes',
-            duration: 2000,
-            mask: true
-          })
-        } else {
-          wx.showToast({
-            title: '服务器忙，请稍后再试',
-            icon: 'succes',
-            duration: 2000,
-            mask: true
-          })
-        }
 
+    //提交表单
+    ///
+    const db = wx.cloud.database()
+    //console.log(this.data)
+
+
+    //var that = this
+    db.collection('books').doc(that.data.counterId).get({
+
+      success(res) {
+
+        var b = res.data.tags;
+        // obj = JSON.stringify(res.data.tags)
+        // a = JSON.parse(obj)
+        //console.log(that.data.timeIndex)
+        b[that.data.timeIndex] = '约满';
+        a = JSON.stringify(res.data.tags);
+        that.setData({ bind: JSON.parse(a) });
+        //console.log(a)
+
+      },
+    });
+
+
+
+    db.collection('books').doc(that.data.counterId).update({
+      // data 传入需要局部更新的数据
+      data: {
+        // 表示将 tags 字段置为 a
+        tags: that.data.bind,
+      },
+      success(res) {
+        //console.log(that.data.bind)
+        wx.showToast({
+          title: '成功',
+          duration: 1000,
+        });
+        setTimeout(function () {
+        wx.reLaunch({
+          url: '/pages/index1/index',
+        });
+        },1000);
         //清空表单
-        that.setData({
-          username: '',
-          phone1: '',
-          count: ''
-        })
+        // that.setData({
+        //   username: '',
+        //   phone1: '',
+        //   count: ''
+        // })
       }
     })
+    ///
   },
   // callPhone: function () {
   //   wx.makePhoneCall({
@@ -174,15 +194,15 @@ Page({
       })
       return false;
     }
-    if (e.detail.value.enterdate.length == 0) {
-      wx.showToast({
-        title: "请选择日期",
-        icon: 'loading',
-        duration: 1000,
-        mask: true
-      })
-      return false;
-    }
+    // if (e.detail.value.enterdate.length == 0) {
+    //   wx.showToast({
+    //     title: "请选择日期",
+    //     icon: 'loading',
+    //     duration: 1000,
+    //     mask: true
+    //   })
+    //   return false;
+    // }
     if (e.detail.value.count.length == 0) {
       wx.showToast({
         title: "请填写人数",
@@ -229,48 +249,50 @@ Page({
   },
 
   ///
-  submiANDback: function (res) {
-    const db = wx.cloud.database()
-    //console.log(this.data.counterId)
+
+  // submiANDback: function (res) {
+  //   const db = wx.cloud.database()
+  //   //console.log(this.data.counterId)
 
     
-    var that = this
-    db.collection('books').doc(that.data.counterId).get({
+  //   var that = this
+  //   db.collection('books').doc(that.data.counterId).get({
      
-      success(res) {
+  //     success(res) {
         
-        var b = res.data.tags;
-        // obj = JSON.stringify(res.data.tags)
-        // a = JSON.parse(obj)
-        //console.log(that.data.timeIndex)
-        b[that.data.timeIndex] = '约满';
-        a = JSON.stringify(res.data.tags);
-        that.setData({ bind: JSON.parse(a)});
-        //console.log(a)
+  //       var b = res.data.tags;
+  //       // obj = JSON.stringify(res.data.tags)
+  //       // a = JSON.parse(obj)
+  //       //console.log(that.data.timeIndex)
+  //       b[that.data.timeIndex] = '约满';
+  //       a = JSON.stringify(res.data.tags);
+  //       that.setData({ bind: JSON.parse(a)});
+  //       //console.log(a)
         
-      },
-    });
+  //     },
+  //   });
     
     
 
-    db.collection('books').doc(this.data.counterId).update({
-      // data 传入需要局部更新的数据
-      data: {
-        // 表示将 tags 字段置为 a
-        tags: that.data.bind,
-      },
-      success(res) {
-        //console.log(that.data.bind)
-        wx.showToast({
-          title: '成功',
-        })
-        wx.navigateTo({
-          url: '/pages/index1/index',
-        })
-      }
-    })
+  //   db.collection('books').doc(this.data.counterId).update({
+  //     // data 传入需要局部更新的数据
+  //     data: {
+  //       // 表示将 tags 字段置为 a
+  //       tags: that.data.bind,
+  //     },
+  //     success(res) {
+  //       //console.log(that.data.bind)
+  //       wx.showToast({
+  //         title: '成功',
+  //       })
+  //       wx.navigateTo({
+  //         url: '/pages/index1/index',
+  //       })
+  //     }
+  //   })
   
-  }
+  // }
+
 
   ///
 })
