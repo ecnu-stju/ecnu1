@@ -9,6 +9,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    array: ['研讨室','其他房间'],
+    objectArray: [
+      {
+        id: 0,
+        name: '研讨室'
+      },
+      {
+        id: 1,
+        name: '其他房间'
+      }],
+    index: 0,
+
     cacheDate: '',
     calendar: [],
     width: 0,
@@ -398,6 +410,14 @@ Page({
     /*this.setData({
       'timeArr[q].status':"约满"
     })*/
+  },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
   }
+
 
 })

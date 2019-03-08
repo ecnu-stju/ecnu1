@@ -12,14 +12,29 @@
   <view wx:for="{{ timeArr }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key=''>
    <text>{{ timeItem.time }}</text>
    <text>{{ timeItem.status }}</text>
-  </view>
-  <view class='operate'>
+   </view>
+ </view> 
+ 
+ <view class='pick'>
+  
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view>
+         <text style="font-size: 50rpx">当前房间:</text>
+          <text class="picker">{{array[index]}}</text>
+         </view>
+    </picker>
+         
+       
+ </view>
+
+ <view class='operate'>
    
    <button class='save' data-time="{{ timeItem.time}}" bindtap='jumpPage' hover-class="btn-hover">
     <image class="btn_image" src="../../images/btn.png"></image>
     <text>预约</text>
    </button>
-  </view>
  </view>
+ 
 
 </view>
+

@@ -95,13 +95,14 @@ scroll-view .current text{
  width: 710rpx;
  padding: 30rpx 0;
  position: relative;
- margin-top: 150rpx;
+ margin-top: 50rpx;
 }
 
 .back{
   background-size: 100% 100%;
-  width: 750rpx;
-  height: 1300rpx;
+  width: 100%;
+  height: 100%;
+  
 }
 
 .save.btn-hover {
@@ -112,4 +113,25 @@ scroll-view .current text{
   width: 70rpx;
   height: 70rpx;
   margin-right: 15rpx;
+}
+
+.pick{
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 50rpx 0;
+ box-sizing: border-box;
+}
+
+.picker{
+  border: 6rpx solid black;
+  background-color: transparent;
+  font-size: 50rpx;
+}
+
+.section__title{
+  font-size: 50rpx;
+  font-style: initial;
+  margin-bottom: 30rpx;
 }
